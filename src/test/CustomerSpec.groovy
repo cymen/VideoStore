@@ -11,7 +11,8 @@ class CustomerSpec extends Specification {
 		
 		expect:
 		customer.ConvertCentsToDollars(0) == 0.00
-		customer.ConvertCentsToDollars(150) == 1.50		
+		customer.ConvertCentsToDollars(150) == 1.50
+		customer.ConvertCentsToDollars(300001) == 3000.01
 	}
 	
 	def "constructor sets name"() {
@@ -44,7 +45,7 @@ class CustomerSpec extends Specification {
 	def "a customer with no rentals produces a statement with no total"() {
 		setup:
 		def customer = new Customer("Sergio Leone")
-		def statement = customer.getStatement()
+		def statement = customer.Statement()
 		
 		expect:
 		statement.contains("Rental Record for Sergio Leone\n") == true
@@ -57,7 +58,7 @@ class CustomerSpec extends Specification {
 		def rental = new Rental(movie, 1)
 		def customer = new Customer("Sergio Leone")
 		customer.addRental(rental)
-		def statement = customer.getStatement()
+		def statement = customer.Statement()
 		
 		expect:
 		statement.contains("Rental Record for Sergio Leone\n") == true

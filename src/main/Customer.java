@@ -26,7 +26,7 @@ public class Customer {
 		return rentals;
 	}
 	
-	public String getStatement() {
+	public String Statement() {
 		int totalAmount = 0;
 		int frequentRenterPoints = 0;
 		String result = String.format("Rental Record for %s\n", this.name);
