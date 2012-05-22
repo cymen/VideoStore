@@ -1,4 +1,4 @@
-package test
+package spec
 import main.Customer;
 import main.Movie;
 import main.Rental;
