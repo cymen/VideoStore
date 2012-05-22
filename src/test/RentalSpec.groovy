@@ -5,7 +5,6 @@ import spock.lang.*;
 
 class RentalSpec extends Specification {
 	def "constructor sets movie and days rented"() {
-		setup:
 		def movie = new Movie("Once Upon a Time in the West", Movie.NEW_RELEASE)
 		def rental = new Rental(movie, 4)
 
