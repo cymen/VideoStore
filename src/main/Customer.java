@@ -56,27 +56,27 @@ public class Customer {
 	}
 
 	private int amountFor(Rental rental) {
-		int thisAmount = 0;
+		int result = 0;
 		
 		// determine amounts for each line
 		switch(rental.getMovie().getPriceCode()) {
 			case Movie.REGULAR:
-				thisAmount += 200;
+				result += 200;
 				if (rental.getDaysRented() > 2) {
-					thisAmount += (rental.getDaysRented() - 2) * 150;
+					result += (rental.getDaysRented() - 2) * 150;
 				}
 				break;
 			case Movie.NEW_RELEASE:
-				thisAmount += rental.getDaysRented() * 300;
+				result += rental.getDaysRented() * 300;
 				break;
 			case Movie.CHILDRENS:
-				thisAmount += 150;
+				result += 150;
 				if (rental.getDaysRented() > 3) {
-					thisAmount += (rental.getDaysRented() -3) * 150;
+					result += (rental.getDaysRented() -3) * 150;
 				}
 				break;
 		}
-		return thisAmount;
+		return result;
 	}
 	
 	public BigDecimal ConvertCentsToDollars(int cents) {		
