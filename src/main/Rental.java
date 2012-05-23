@@ -18,4 +18,27 @@ public class Rental {
 	public int getDaysRented() {
 		return daysRented;
 	}
+
+	public int charge() {
+		int result = 0;
+		
+		switch(this.getMovie().getPriceCode()) {
+			case Movie.REGULAR:
+				result += 200;
+				if (this.getDaysRented() > 2) {
+					result += (this.getDaysRented() - 2) * 150;
+				}
+				break;
+			case Movie.NEW_RELEASE:
+				result += this.getDaysRented() * 300;
+				break;
+			case Movie.CHILDRENS:
+				result += 150;
+				if (this.getDaysRented() > 3) {
+					result += (this.getDaysRented() -3) * 150;
+				}
+				break;
+		}
+		return result;
+	}
 }
