@@ -34,12 +34,8 @@ public class Customer {
 		Iterator<Rental> iterator = this.rentals.iterator();
 		while (iterator.hasNext()) {		
 			Rental rental = iterator.next();
-			// add frequent renter points
-			frequentRenterPoints += 1;
-			// add bonus for two day new release rental
-			if (rental.getMovie().getPriceCode() == Movie.NEW_RELEASE && rental.getDaysRented() > 1) {
-				frequentRenterPoints += 1;
-			}
+						
+			frequentRenterPoints += frequentRenterPoints(rental);
 			
 			// show figures for this rental
 			result += String.format("\t%s\t%s\n", rental.getMovie().getTitle(), rental.charge());
@@ -51,6 +47,16 @@ public class Customer {
 		result += String.format("You earned %s frequent renter points\n", frequentRenterPoints);
 		
 		return result;
+	}
+
+	private int frequentRenterPoints(Rental rental) {
+		// add frequent renter points
+		int subTotal = 1;
+		// add bonus for two day new release rental
+		if (rental.getMovie().getPriceCode() == Movie.NEW_RELEASE && rental.getDaysRented() > 1) {
+			subTotal += 1;
+		}
+		return subTotal;
 	}
 
 	public BigDecimal ConvertCentsToDollars(int cents) {		
