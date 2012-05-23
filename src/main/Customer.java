@@ -34,7 +34,7 @@ public class Customer {
 		Iterator<Rental> iterator = this.rentals.iterator();
 		while (iterator.hasNext()) {		
 			Rental rental = iterator.next();
-			int thisAmount = amountFor(rental);
+			int thisAmount = rental.charge();
 			
 			// add frequent renter points
 			frequentRenterPoints += 1;
@@ -55,10 +55,6 @@ public class Customer {
 		return result;
 	}
 
-	private int amountFor(Rental rental) {
-		return rental.charge();
-	}
-	
 	public BigDecimal ConvertCentsToDollars(int cents) {		
 		return new BigDecimal((float) cents/100).setScale(2, BigDecimal.ROUND_HALF_UP);
 	}
