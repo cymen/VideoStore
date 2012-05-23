@@ -34,26 +34,7 @@ public class Customer {
 		Iterator<Rental> iterator = this.rentals.iterator();
 		while (iterator.hasNext()) {		
 			Rental rental = iterator.next();
-			int thisAmount = 0;
-			
-			// determine amounts for each line
-			switch(rental.getMovie().getPriceCode()) {
-				case Movie.REGULAR:
-					thisAmount += 200;
-					if (rental.getDaysRented() > 2) {
-						thisAmount += (rental.getDaysRented() - 2) * 150;
-					}
-					break;
-				case Movie.NEW_RELEASE:
-					thisAmount += rental.getDaysRented() * 300;
-					break;
-				case Movie.CHILDRENS:
-					thisAmount += 150;
-					if (rental.getDaysRented() > 3) {
-						thisAmount += (rental.getDaysRented() -3) * 150;
-					}
-					break;
-			}
+			int thisAmount = amountFor(rental);
 			
 			// add frequent renter points
 			frequentRenterPoints += 1;
@@ -72,6 +53,30 @@ public class Customer {
 		result += String.format("You earned %s frequent renter points\n", frequentRenterPoints);
 		
 		return result;
+	}
+
+	private int amountFor(Rental rental) {
+		int thisAmount = 0;
+		
+		// determine amounts for each line
+		switch(rental.getMovie().getPriceCode()) {
+			case Movie.REGULAR:
+				thisAmount += 200;
+				if (rental.getDaysRented() > 2) {
+					thisAmount += (rental.getDaysRented() - 2) * 150;
+				}
+				break;
+			case Movie.NEW_RELEASE:
+				thisAmount += rental.getDaysRented() * 300;
+				break;
+			case Movie.CHILDRENS:
+				thisAmount += 150;
+				if (rental.getDaysRented() > 3) {
+					thisAmount += (rental.getDaysRented() -3) * 150;
+				}
+				break;
+		}
+		return thisAmount;
 	}
 	
 	public BigDecimal ConvertCentsToDollars(int cents) {		
