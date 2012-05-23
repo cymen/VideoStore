@@ -27,21 +27,26 @@ public class Customer {
 	}
 	
 	public String Statement() {
-		int frequentRenterPoints = 0;
 		String result = String.format("Rental Record for %s\n", this.name);
-		
+
 		for ( Rental rental : this.rentals) {		
-						
-			frequentRenterPoints += rental.frequentRenterPoints();
-			
 			// show figures for this rental
 			result += String.format("\t%s\t%s\n", rental.getMovie().getTitle(), rental.charge());
-		}
+		}		
+		
 		// add footer lines
 		result += String.format("Amount owed is %s\n", ConvertCentsToDollars(totalCharge()));
-		result += String.format("You earned %s frequent renter points\n", frequentRenterPoints);
+		result += String.format("You earned %s frequent renter points\n", totalFrequentRenterPoints());
 		
 		return result;
+	}
+
+	private int totalFrequentRenterPoints() {
+		int frequentRenterPoints = 0;
+		for ( Rental rental : this.rentals) {		
+			frequentRenterPoints += rental.frequentRenterPoints();
+		}
+		return frequentRenterPoints;
 	}
 
 	private int totalCharge() {
