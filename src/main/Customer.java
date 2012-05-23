@@ -34,8 +34,6 @@ public class Customer {
 		Iterator<Rental> iterator = this.rentals.iterator();
 		while (iterator.hasNext()) {		
 			Rental rental = iterator.next();
-			int thisAmount = rental.charge();
-			
 			// add frequent renter points
 			frequentRenterPoints += 1;
 			// add bonus for two day new release rental
@@ -44,8 +42,8 @@ public class Customer {
 			}
 			
 			// show figures for this rental
-			result += String.format("\t%s\t%s\n", rental.getMovie().getTitle(), "a");
-			totalAmount += thisAmount;
+			result += String.format("\t%s\t%s\n", rental.getMovie().getTitle(), rental.charge());
+			totalAmount += rental.charge();
 		}
 		
 		// add footer lines
